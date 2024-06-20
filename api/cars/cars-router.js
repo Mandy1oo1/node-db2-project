@@ -1,55 +1,33 @@
 // DO YOUR MAGIC
-const express = require('express');
-const Car = require('./cars-model');
-const router = express.Router();
+const express = require('express')
+const Car = require('./cars-model')
+const router = express.Router()
 const {
     checkCarId,
     checkCarPayload,
-    checkVinNumberValid,
     checkVinNumberUnique,
-} = require('./cars-middleware');
+    checkVinNumberValid,
+} = require('./cars-middleware')
 
 router.get('/', async (req, res, next) => {
-    try {
-        const cars = await Car.getAll();
-        res.status(200).json(cars);
-    } catch (error) {
-        next(error);
+    try{
+        const cars = await Car.getAll()
+        res.status(200).json(cars)
+    }catch(err){
+        next(err)
     }
-});
+})
 
 router.get('/:id', checkCarId, async (req, res, next) => {
-    res.json(req.car);
-});
+    res.json(req.car)
+})
 
-router.post(
-    '/',
-    checkCarPayload,
-    checkVinNumberValid,
-    checkVinNumberUnique, async (req, res, next) => {
-    try {
-        const cars = await Car.create(req.body);
-        res.status(200).json(cars);
-    } catch (error) {
-        next(error);
-    }
-});
+router.post('/', 
+    checkCarPayload, 
+    checkVinNumberUnique, 
+    checkVinNumberValid, 
+    async (req, res, next) => {
+        res.json('posting new car')
+    })
 
-router.put(
-    '/:id',
-     checkCarId,
-     checkCarPayload,
-     checkVinNumberValid,
-     checkVinNumberUnique, async (req, res, next) => {
-    try {
-        res.json('editing a new car');
-    } catch (error) {
-        next(error);    
-    }
-});
-
-module.exports = router;
-
-
-
-
+module.exports = router
