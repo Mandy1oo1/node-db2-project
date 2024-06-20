@@ -6,10 +6,7 @@
     "server": "nodemon index.js",
     "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand",
     "up": "knex migrate:up",
-    "down": "knex migrate:down",
-    "latest": "knex migrate:latest",
-    "rollback": "knex migrate:rollback",
-    "seed": "knex seed:run"
+    "down": "knex migrate:down"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
