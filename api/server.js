@@ -1,22 +1,20 @@
-const express = require("express")
+const express = require("express");
+const carsRouter = require("./cars/cars-router");
 
-const server = express()
+const server = express();
 
-const carsRouter = require('./cars/cars-router')
+server.use(express.json());
 
-server.use(express.json())
+server.use('/api/cars', carsRouter);
 
-server.use('/api/cars', carsRouter)
+server.use('*', (req, res, next) => {
+   next({ status: 400, message: "not found." });
+});
 
-server.get('/', (req, res, next) => {
-    res.send('server is up and running')
-})
-
-server.use((err, req, res, next) => {
+server.use((err, req, res, next) => { // eslint-disable-line
     res.status(err.status || 500).json({
-        message: process.env.NODE_ENV === 'PROD' ? 'sorry, there was an error!' : err.message,
-        stack: err.stack
-    })
-})
+        message: err.message
+    });
+});
 
-module.exports = server
+module.exports = server;
