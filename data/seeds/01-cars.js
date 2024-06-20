@@ -1,30 +1,31 @@
+// STRETCH
 const cars = [
     {
-        vin: '2B3KA43GX6H200038',
-        make: 'Acura',
-        model: 'TLX',
-        mileage: 0,
-        title: 'noice',
-        transmission: 'automatic'
+        vin: '1532596459853',
+        make: 'toyata',
+        model: 'prius',
+        mileage: 215000,
+        title: 'clean',
+        transmission: 'manual'
     },
     {
-        vin: '2V4RW4D10AR353397',
-        make: 'Genesis',
-        model: '370',
-        mileage: 0,
-        title: 'new',
-        transmission: 'automatic'
+        vin: '1532596459858',
+        make: 'toyata',
+        model: 'corolla',
+        mileage: 115000,
+        title: 'salvage',
+    },
+    {
+        vin: '1532596459850',
+        make: 'ford',
+        model: 'focu',
+        mileage: 15000,
     },
 ]
 
-// exports.seed = function(knex) {
-//     return knex('cars')
-//     .truncate().then(() => {
-//         return knex('cars').insert(cars)
-//     })
-// }
-
-exports.seed = async function(knex) {
-    await knex('cars').truncate()
-    await knex('cars').insert(cars)
+exports.seed = function(knex) {
+    return knex('cars')
+    .truncate().then(() => {
+        return knex('cars').insert(cars)
+    })
 }
